@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MoneyTalks</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+        </style>
+</head>
+<body>
+    <header class="hero">
+        <nav class="navbar">
+            <div class="logo"><a href="index.html"><img src="assets/logo.png" width="100"></a></div>
+            <ul class="nav-links">
+               <!-- <li><a href="#index">Home</a></li> -->
+               <li><a href="dashboard.html">Dashboard</a></li>
+               <li><a href="about.html">About</a></li>
+               <li><a href="profile.html">Profile</a></li>
+            </ul>
+        </nav>
+        <div class="hero-content">
+            <h1>Dashboard</h1>
+            <div id="countdown">
+                <p>Days until payday:</p>
+                <div id="time"></div>
+            </div>
+
+            <div>
+                <label for="payday">Enter your payday (YYYY-MM-DD):</label>
+                <input type="date" id="payday" name="payday">
+                <label for="frequency">Pay frequency (days):</label>
+                <input type="number" id="frequency" name="frequency" min="1">
+                <button onclick="updateCountdown()">Update</button>
+            </div>
+            <script>
+                let interval;
+
+                function countdown(payday, frequency) {
+                    const now = new Date().getTime();
+                    const distance = payday - now;
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+
+                    document.getElementById('time').innerHTML = days;
+
+                    if (distance < 0) {
+                        clearInterval(interval);
+                        document.getElementById('time').innerHTML = 'Today is payday!';
+                        payday.setDate(payday.getDate() + frequency);
+                        interval = setInterval(() => countdown(payday, frequency), 1000);
+                    }
+                }
+
+                function updateCountdown() {
+                    const paydayInput = document.getElementById('payday').value;
+                    const frequencyInput = document.getElementById('frequency').value;
+
+                    if (paydayInput && frequencyInput) {
+                        const payday = new Date(paydayInput).getTime();
+                        const frequency = parseInt(frequencyInput);
+
+                        clearInterval(interval);
+                        interval = setInterval(() => countdown(new Date(payday), frequency), 1000);
+                    }
+                }
+            </script>
+        </div>
+    </header>
+    <script src="scripts.js"></script>
+</body>
+</html>

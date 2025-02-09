@@ -1,0 +1,106 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: "Inter", serif;
+    background-color: #d5d3cc; /* Solid background color */
+}
+
+.hero {
+    height: 100vh;
+    color: #406768;
+    display: flex;
+    flex-direction: column;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #406768; /* Complementing color for navbar */
+    color: #d5d3cc;
+    height: 90px;
+    margin-bottom: 25px;
+}
+
+.logo {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 20px;
+}
+
+.nav-links a:hover {
+    background-color: #6fa9bb;
+    border-radius: 100px;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 20px;
+}
+
+.hero-content {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.hero-content h1 {
+    font-size: 48px;
+    margin-bottom: 20px;
+}
+
+.hero-content p {
+    font-size: 24px;
+    margin-bottom: 30px;
+}
+
+.btn {
+    padding: 10px 20px;
+    background-color: #6fa9bb;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+}
+
+.btn:hover {
+    background-color: #406768;
+}
+
+input[type="text"] {
+    margin: 10px;
+    padding: 7px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+input[type="password"] {
+    padding: 7px;
+    margin: 10px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+}
+
+button[type="submit"] {
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #6fa9bb;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    border: none;
+}
+
+button[type="submit"]:hover {
+    background-color: #406768;
+}
