@@ -74,7 +74,7 @@ body, html {
     background-color: #406768;
 }
 
-input[type="text"] {
+input {
     margin: 10px;
     padding: 7px;
     font-size: 16px;
@@ -82,15 +82,7 @@ input[type="text"] {
     border-radius: 5px;
 }
 
-input[type="password"] {
-    padding: 7px;
-    margin: 10px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-}
-
-button[type="submit"] {
+button {
     margin: 10px;
     padding: 10px 20px;
     background-color: #6fa9bb;
@@ -101,6 +93,6 @@ button[type="submit"] {
     border: none;
 }
 
-button[type="submit"]:hover {
+button:hover {
     background-color: #406768;
 }
