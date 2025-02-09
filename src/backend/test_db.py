@@ -3,7 +3,7 @@ import unittest
 
 from psycopg import connect
 
-from src.backend.db import DBHandler
+from db import DBHandler
 
 class TestDBHandler(unittest.TestCase):
     @classmethod

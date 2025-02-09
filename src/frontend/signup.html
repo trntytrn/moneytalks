@@ -21,11 +21,20 @@
             </ul>
         </nav>
         <div class="hero-content">
-            <img src="assets/pig.png" width="250" id="homepic">
-            <h1>Welcome to MoneyTalks</h1>
-            <p>Helping You Make Cents of Your Money.</p>
-            <a href="signup.html" class="btn">Get Started</a>
-            <div id="api-result"></div>
+            <h1>Sign Up</h1>
+            <div class="signup">
+            <form action="signup.php" method="POST">
+            <input type="email" name="email" placeholder="Email" required>
+            <br>
+            <input type="password" name="password" placeholder="Password" required>
+            <br>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" required>
+            <br>
+            <button type="submit">Sign Up</button>
+            </form>
+            <p id="signup-feedback"></p>
+            <p>Already have an account? <a href="login.html">Log in here</a></p>
+        </div>
         </div>
     </header>
     <script src="scripts.js"></script>

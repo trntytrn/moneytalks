@@ -22,23 +22,15 @@
         </nav>
         <div class="hero-content">
             <h1>Dashboard</h1>
+            <button onclick="window.location.href='chatbot.html'">Chat with PorkGPT</button>
             <div id="countdown">
-                <p>Days until payday:</p>
+                <h2>Days until payday:</h2>
                 <div id="time"></div>
             </div>
 
-            <div>
-                <label for="payday">Enter your last payday (YYYY-MM-DD):</label>
-                <input type="date" id="payday" name="payday">
-                <br>
-                <label for="frequency">Pay frequency (days):</label>
-                <input type="number" id="frequency" name="frequency" min="1">
-                <br>
-                <button onclick="updateCountdown()">Update</button>
-            </div>
             <button id="show-update-form">Need to update your payday?</button>
             <div id="update-form" style="display: none;">
-                <label for="payday">Enter your last payday (YYYY-MM-DD):</label>
+                <label for="payday">Enter your next payday (YYYY-MM-DD):</label>
                 <input type="date" id="payday" name="payday">
                 <br>
                 <label for="frequency">Pay frequency (days):</label>
@@ -54,15 +46,13 @@
                     const now = new Date().getTime();
                     const distance = payday - now;
 
-                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const days = Math.ceil(distance / (1000 * 60 * 60 * 24));
 
                     document.getElementById('time').innerHTML = days;
 
                     if (distance < 0) {
                         clearInterval(interval);
                         document.getElementById('time').innerHTML = 'Today is payday!';
-                        payday.setDate(payday.getDate() + frequency);
-                        interval = setInterval(() => countdown(payday, frequency), 1000);
                     }
                 }
 
@@ -74,6 +64,9 @@
                         const payday = new Date(paydayInput).getTime();
                         const frequency = parseInt(frequencyInput);
 
+                        localStorage.setItem('payday', payday);
+                        localStorage.setItem('frequency', frequency);
+
                         clearInterval(interval);
                         interval = setInterval(() => countdown(new Date(payday), frequency), 1000);
                     }
@@ -82,6 +75,102 @@
                 document.getElementById('show-update-form').addEventListener('click', function() {
                     document.getElementById('update-form').style.display = 'block';
                 });
+
+                window.onload = function() {
+                    const payday = localStorage.getItem('payday');
+                    const frequency = localStorage.getItem('frequency');
+
+                    if (payday && frequency) {
+                        interval = setInterval(() => countdown(new Date(parseInt(payday)), parseInt(frequency)), 1000);
+                    }
+                }
+            </script>
+            <div id="spending-form"> 
+                <h2>Track Your Spending</h2>
+                <label for="item">Item:</label>
+                <input type="text" id="item" name="item">
+                <br>
+                <label for="category">Category:</label>
+                <input type="text" id="category" name="category">
+                <br>
+                <label for="amount">Price:</label>
+                <input type="number" id="amount" name="amount" step="0.01">
+                <br>
+                <label for="date">Date Bought:</label>
+                <input type="date" id="date" name="date">
+                <br>
+                <button onclick="addSpending()">Add Spending</button>
+            </div>
+
+            <h2>Your Spending Habits</h2>
+            <ul id="spending-list">
+                <li>2025-02-04: Lunch (food) - $12.48</li>
+                <li>2025-02-06: Shampoo (beauty) - $5.99</li>
+                <li>2025-02-07: Batteries (misc) - $10.99</li>
+            </ul>
+
+            <script>
+                function addSpending() {
+                    const item = document.getElementById('item').value;
+                    const category = document.getElementById('category').value;
+                    const amount = document.getElementById('amount').value;
+                    const date = document.getElementById('date').value;
+
+                    if (item && category && amount && date) {
+                        const spendingList = document.getElementById('spending-list');
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${date}: ${item} (${category}) - $${amount}`;
+                        
+                        // Add delete button
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.className = 'delete-button';
+                        deleteButton.onclick = function() {
+                            spendingList.removeChild(listItem);
+                            deleteSpending(item, category, amount, date);
+                        };
+                        listItem.appendChild(deleteButton);
+
+                        spendingList.appendChild(listItem);
+
+                        // Save to local storage
+                        const spendingData = JSON.parse(localStorage.getItem('spendingData')) || [];
+                        spendingData.push({ item, category, amount, date });
+                        localStorage.setItem('spendingData', JSON.stringify(spendingData));
+                    }
+                }
+
+                function deleteSpending(item, category, amount, date) {
+                    let spendingData = JSON.parse(localStorage.getItem('spendingData')) || [];
+                    spendingData = spendingData.filter(spending => 
+                        spending.item !== item || 
+                        spending.category !== category || 
+                        spending.amount !== amount || 
+                        spending.date !== date
+                    );
+                    localStorage.setItem('spendingData', JSON.stringify(spendingData));
+                }
+
+                // Load spending data from local storage on page load
+                window.onload = function() {
+                    const spendingData = JSON.parse(localStorage.getItem('spendingData')) || [];
+                    const spendingList = document.getElementById('spending-list');
+                    spendingData.forEach(spending => {
+                        const listItem = document.createElement('li');
+                        listItem.textContent = `${spending.date}: ${spending.item} (${spending.category}) - $${spending.amount}`;
+                        
+                        // Add delete button
+                        const deleteButton = document.createElement('button');
+                        deleteButton.textContent = 'Delete';
+                        deleteButton.onclick = function() {
+                            spendingList.removeChild(listItem);
+                            deleteSpending(spending.item, spending.category, spending.amount, spending.date);
+                        };
+                        listItem.appendChild(deleteButton);
+
+                        spendingList.appendChild(listItem);
+                    });
+                }
             </script>
         </div>
     </header>

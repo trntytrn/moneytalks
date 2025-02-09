@@ -3,7 +3,9 @@ import unittest
 import json
 import dotenv
 
-from src.backend.serve import app, db_handler
+from openai import APITimeoutError
+
+from serve import app, db_handler
 
 class TestServe(unittest.TestCase):
     @classmethod

@@ -5,6 +5,7 @@ body, html {
     background-color: #d5d3cc; /* Solid background color */
 }
 
+
 .hero {
     height: 100vh;
     color: #406768;
@@ -43,6 +44,7 @@ body, html {
     text-decoration: none;
     font-size: 18px;
     padding: 20px;
+    margin: 10px;
 }
 
 .hero-content {
@@ -95,4 +97,103 @@ button {
 
 button:hover {
     background-color: #406768;
+}
+
+#time {
+    font-size: 50px;
+    margin-bottom: 20px;
+}
+
+.delete-button {
+    font-size: 14px;
+    padding: 6px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    margin: 10px;
+}
+
+#about {
+    margin-right: 70px;
+    margin-left: 70px;
+}
+
+h2 {
+    font-size: 28px;
+}
+
+.profile-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #acb3a9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
+}
+
+.cards {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.signup a {
+    color: #6fa9bb;
+}
+
+.signup a:hover {
+    color: #406768;
+}
+
+.signup a:visited {
+    color: #19350c;
+}
+
+.signup a:visited:hover {
+    color: #406768;
+}
+
+.login a {
+    color: #6fa9bb;
+}
+
+.login a:hover {
+    color: #406768;
+}
+
+.login a:visited {
+    color: #19350c;
+}
+
+.login a:visited:hover {
+    color: #406768;
+}
+
+.features-list {
+    display: inline-block;
+    text-align: left;
+    font-size: 24px;
+    margin: 0px;
+}
+
+.loading {
+    font-family: "Inter", serif;
+    font-style: italic;
+    color: gray;
+}
+
+.chat-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    padding: 20px;
+    background-color: #acb3a9;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 500px;
 }
